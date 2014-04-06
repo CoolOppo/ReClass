@@ -7,7 +7,7 @@ extern DWORD NodeCreateIndex;
 template <class T>
 int NumDigits(T number)
 {
-    __int64 digits = 0;
+    int digits = 0;
 
 	// remove this if '-' counts as a digit
     if ( number < 0 )
@@ -35,9 +35,9 @@ public:
 		if (pMemory) delete pMemory;
 	}
 
-	DWORD MemorySize;
+	size_t MemorySize;
 	BYTE* pMemory;
-	void SetSize(DWORD Size)
+	void SetSize(size_t Size)
 	{
 		if ( (!pMemory) || (Size != MemorySize) )
 		{
@@ -1206,7 +1206,7 @@ public:
 	{
 		if (bHidden) return DrawHidden(View,x,y);
 		
-		__int64* pMemory = (__int64*) &((BYTE*)View.pData)[offset];
+		unsigned __int64* pMemory = (unsigned __int64*) &((BYTE*)View.pData)[offset];
 
 
 		AddSelection( View, 0, y, FontHeight );

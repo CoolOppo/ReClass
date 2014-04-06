@@ -57,7 +57,7 @@ CString tdMatrix("D3DXMATRIX");
 
 vector<HICON> Icons;
 
-void ReadMemory( DWORD_PTR Address, void* Buffer, DWORD Size )
+void ReadMemory( DWORD_PTR Address, void* Buffer, size_t Size )
 {
 	if ( ReadProcessMemory( hProcess, ( void* )Address, Buffer, Size, NULL ) == 0)
 	{
@@ -65,7 +65,7 @@ void ReadMemory( DWORD_PTR Address, void* Buffer, DWORD Size )
 		ZeroMemory( Buffer, Size );
 	}
 }
-void WriteMemory(DWORD_PTR Address,void* Buffer,DWORD Size)
+void WriteMemory(DWORD_PTR Address,void* Buffer,size_t Size)
 {
 	DWORD OldProtect;
 //	VirtualProtectEx  (hProcess,(void*)Address,Size,PAGE_READWRITE,&OldProtect); <- srsly PAGE_READWRITE? O_o
@@ -82,7 +82,7 @@ void WriteMemory(DWORD_PTR Address,void* Buffer,DWORD Size)
 CString ReadMemoryString( DWORD_PTR address, size_t max )
 {
 	char	buffer[1024];
-	size_t	bytesRead;
+	SIZE_T	bytesRead;
 
 	if ( ReadProcessMemory( hProcess, ( PVOID )address, buffer, max, &bytesRead ) != 0 )
 	{
@@ -90,7 +90,7 @@ CString ReadMemoryString( DWORD_PTR address, size_t max )
 		//printf( "Bytes Read: %d\n", bytesRead );
 		//printf( "String %s\n", buffer );
 		
-		for ( int i = 0; i < bytesRead; i++ )
+		for ( SIZE_T i = 0; i < bytesRead; i++ )
 		{
 			// If not a printable character and is not null terminator replace with '.'
 			if ( !( isprint( buffer[i] & 0xFF ) ) && buffer[i] != '\0' )

@@ -142,8 +142,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	//CreateConsole( );
 
-	// Why?
-	SetTimer( 69, 5000, NULL );
+	SetTimer( 69, 5000, NULL );		//update every 5 seconds
 
 	return 0;
 }
@@ -518,7 +517,7 @@ void CMainFrame::OnButtonSelectprocess()
 					dc.SelectObject( pOldBmp );
 					dc.DeleteDC();
 
-					DWORD MsgID = WM_PROCESSMENU + ProcMenuItems.size();
+					UINT MsgID = static_cast<UINT>(WM_PROCESSMENU + ProcMenuItems.size());
 					menu.AppendMenu( MF_STRING | MF_ENABLED, MsgID , ProcInfo.szExeFile );
 					menu.SetMenuItemBitmaps(MsgID, MF_BYCOMMAND,pBitmap,pBitmap);
 

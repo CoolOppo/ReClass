@@ -175,7 +175,7 @@ BOOL CDialogEdit::OnInitDialog()
 void CDialogEdit::OnCancel()
 {
 	// Get text length
-	UINT uSize = SendEditor( SCI_GETLENGTH, 0, 0L );
+	LRESULT uSize = SendEditor( SCI_GETLENGTH, 0, 0L );
 	if ( uSize )
 	{
 		char *pBuf = new char[ uSize + 1 + 8 ];
@@ -312,7 +312,7 @@ void CDialogEdit::OnFileEditorsaveas()
 		{	ShowError( "Error creating file" ); return; }
 
 		// Get text length
-		UINT uSize = SendEditor( SCI_GETLENGTH, 0, 0L );
+		LRESULT uSize = SendEditor( SCI_GETLENGTH, 0, 0L );
 		if ( !uSize ) return;
 
 		// Allocate memory

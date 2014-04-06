@@ -242,13 +242,17 @@ bool IsModule(DWORD_PTR Address);
 CString GetAddressName(DWORD_PTR Address,bool bHEX);
 CString GetModuleName(DWORD_PTR Address);
 
-void ReadMemory(DWORD_PTR Address,void* Buffer,DWORD Size);
-void WriteMemory(DWORD_PTR Address,void* Buffer,DWORD Size);
+void ReadMemory(DWORD_PTR Address,void* Buffer,size_t Size);
+void WriteMemory(DWORD_PTR Address,void* Buffer,size_t Size);
 CString ReadMemoryString( DWORD_PTR address, size_t max = 40 );
 
 #include "Classes.h"
 
+#ifdef _WIN64
+#pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x64' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#else
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
+#endif
 
 extern DWORD NodeCreateIndex;
 
