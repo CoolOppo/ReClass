@@ -115,13 +115,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 	}
 
-	SetTitle( "Reclass 2014 "
-#if _WIN64
-"x64"
-#else
-"x86"
-#endif
-	);
+	SetTitle( RECLASS_FULLNAME );
 
 	// Enable enhanced windows management dialog
 	EnableWindowsDialog(ID_WINDOW_MANAGER, ID_WINDOW_MANAGER, TRUE);

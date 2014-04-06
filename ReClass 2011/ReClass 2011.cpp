@@ -385,7 +385,7 @@ void CReClass2011App::OnFileNew( )
 	}
 	//for (int i=0; i < 2; i++)
 	{
-		// I don't know what the fuck this does
+		// I don't know what the fuck this does		//lm: this seems to create the default view if you add an array (64 bytes of data)
 		CNodeArray* pNode = new CNodeArray;
 		CNodeHex64* pNode2 = new CNodeHex64;
 		pNode->pNode = pNode2;
@@ -898,7 +898,7 @@ void CReClass2011App::SaveXML(char* FileName)
 	doc.LinkEndChild( root );  
 
 	TiXmlComment * comment = new TiXmlComment();
-	comment->SetValue("reclass 2014" );  
+	comment->SetValue( RECLASS_FULLNAME );  
 	root->LinkEndChild( comment );  
 	//---------------------------------------------
 
@@ -1232,10 +1232,10 @@ void CReClass2011App::OnButtonGenerate()
 
 	CString h,t;
 
-	h += "// Generated using ReClass 2014\r\n\r\n";
+	h += "// Generated using " RECLASS_FULLNAME "\r\n\r\n";
 	h += Header + "\r\n";
 
-	for (UINT c=0; c<Classes.size();c++)
+	for (size_t c=0; c<Classes.size();c++)
 	{
 		t.Format("class %s;\r\n",Classes[c]->Name);
 		h += t;

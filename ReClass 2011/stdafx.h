@@ -60,6 +60,17 @@
 //#   pragma comment( lib, "../scintilla/bin/s_scintilla.lib" )
 //#endif
 
+
+#if _WIN64
+#define RECLASS_ARCH_STR	"x64"
+#else
+#define RECLASS_ARCH_STR	"x86"
+#endif
+
+#define RECLASS_FULLNAME	"ReClass 2014 " RECLASS_ARCH_STR
+
+//lm: this gotta move:
+
 #include <vector>
 using namespace std;
 
