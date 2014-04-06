@@ -2,7 +2,7 @@
 #define SDK_H
 
 #include "ReClass 2011.h"
-
+#if 0
 class ReclassSDK
 {
 public:
@@ -126,7 +126,7 @@ private:
 		return -1;
 	};
 
-	CNodeBase* FindPointerByClassId( int Id )
+	CNodeBase* FindPointerByClassId( size_t Id )
 	{
 		if ( Id < theApp.Classes.size( ) )
 			return theApp.Classes.at( Id );
@@ -161,5 +161,5 @@ void LoadPlugin( LPCSTR pszPath )
 		oInit( ReclassSDK::GetInstance( ) );
 	}
 }
-
+#endif
 #endif SDK_H

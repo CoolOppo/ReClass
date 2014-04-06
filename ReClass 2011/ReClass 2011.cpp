@@ -8,8 +8,8 @@
 #include "DialogClasses.h"
 #include "Parser.h"
 
-#include "SDK.h"
-ReclassSDK*	ReclassSDK::m_pReclassSDK;
+//#include "SDK.h"
+//ReclassSDK*	ReclassSDK::m_pReclassSDK;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
