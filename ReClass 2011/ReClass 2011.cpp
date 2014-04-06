@@ -53,6 +53,7 @@ CReClass2011App::CReClass2011App()
 	FontWidth = 12;
 	FontHeight = 12;
 }
+
 void getDebugPriv( )
 {
 	HANDLE hToken;
@@ -150,30 +151,14 @@ BOOL CReClass2011App::InitInstance()
 	m_hMDIMenu  = ::LoadMenu(hInst, MAKEINTRESOURCE(IDR_ReClass2011TYPE));
 	m_hMDIAccel = ::LoadAccelerators(hInst, MAKEINTRESOURCE(IDR_ReClass2011TYPE));
 
-	HICON icon;
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_OPEN)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_CLOSED)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_CLASS)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_METHOD)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_VTABLE)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_DELETE)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_ADD)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_RANDOM)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_DROPARROW)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_POINTER)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_ARRAY)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_CUSTOM)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_ENUM)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_FLOAT)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_LEFT)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_RIGHT)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_MATRIX)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_INTEGER)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_TEXT)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_UNSIGNED)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_VECTOR)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_CHANGE)); Icons.push_back(icon);
-	icon = ::LoadIcon(hInst,MAKEINTRESOURCE(IDI_ICON_CAMERA)); Icons.push_back(icon);
+	WORD iconData[] = {	IDI_ICON_OPEN, IDI_ICON_CLOSED, IDI_ICON_CLASS, IDI_ICON_METHOD, IDI_ICON_VTABLE, IDI_ICON_DELETE, IDI_ICON_ADD, IDI_ICON_RANDOM,
+						IDI_ICON_DROPARROW, IDI_ICON_POINTER, IDI_ICON_ARRAY, IDI_ICON_CUSTOM, IDI_ICON_ENUM, IDI_ICON_FLOAT, IDI_ICON_LEFT, IDI_ICON_RIGHT,
+						IDI_ICON_MATRIX, IDI_ICON_INTEGER, IDI_ICON_TEXT, IDI_ICON_UNSIGNED, IDI_ICON_VECTOR, IDI_ICON_CHANGE, IDI_ICON_CAMERA, 0
+	};
+
+	for( size_t n = 0; iconData[n]; ++n ) {
+		HICON icon = ::LoadIcon(hInst,MAKEINTRESOURCE(iconData[n])); Icons.push_back(icon);
+	}
 
 	//Font.CreatePointFont(80,"Terminal");
 	////Font.CreateFont(16, 8, 0, 0, FW_NORMAL,FALSE, FALSE, FALSE, 0, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,   DEFAULT_QUALITY, FIXED_PITCH, "Terminal");
@@ -950,7 +935,7 @@ void CReClass2011App::SaveXML(char* FileName)
 		classnode->SetAttribute("Name",pClass->Name);
 		classnode->SetAttribute("Type",pClass->GetType());
 		classnode->SetAttribute("Comment",pClass->Comment);
-		classnode->SetAttribute("Offset",pClass->offset);
+		classnode->SetAttribute("Offset",pClass->offset);		//lm: check this.
 		classnode->SetAttribute("strOffset",pClass->strOffset);
 		classnode->SetAttribute("Code",pClass->Code);
 		root->LinkEndChild(classnode);

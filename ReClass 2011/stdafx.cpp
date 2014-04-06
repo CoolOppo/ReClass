@@ -175,7 +175,7 @@ DWORD_PTR GetBase( )
 	//		return true;
 	//}
 
-	return 0x140000000;
+	return 0x140000000L;
 }
 bool IsMemory(DWORD_PTR Address)
 {
@@ -568,7 +568,7 @@ DWORD_PTR ConvertStrToAddress(CString Address)
 			}
 		} else {
 
-			curadd = ( __int64 )StrToNum( a.GetBuffer( ), a.GetLength( ), 16 );
+			curadd = ( DWORD_PTR )StrToNum( a.GetBuffer( ), a.GetLength( ), 16 );
 			//printf( "Final [%p] %d\n", curadd, a.GetLength( ) );
 		}
 

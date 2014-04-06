@@ -373,7 +373,7 @@ class CNodeClass : public CNodeBase
 public:
 	CNodeClass( )
 	{
-		offset = 0x140000000;
+		offset = 0x140000000L;
 
 		//printf( "[+] Created offset: %p Characters: %d\n", offset, NumDigits( offset ) );
 
@@ -670,7 +670,7 @@ public:
 		if (bOpen[View.Level])
 		{
 			// vtable stuff
-			DWORD NeededSize = Nodes.size()*8;
+			size_t NeededSize = Nodes.size()*8;
 			Memory.SetSize(NeededSize);
 			ViewInfo newView;
 			newView = View;
