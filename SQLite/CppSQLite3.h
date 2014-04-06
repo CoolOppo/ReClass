@@ -1,42 +1,14 @@
-////////////////////////////////////////////////////////////////////////////////
-// CppSQLite3 - A C++ wrapper around the SQLite3 embedded database library.
-//
-// Copyright (c) 2004 Rob Groves. All Rights Reserved. rob.groves@btinternet.com
-// 
-// Permission to use, copy, modify, and distribute this software and its
-// documentation for any purpose, without fee, and without a written
-// agreement, is hereby granted, provided that the above copyright notice, 
-// this paragraph and the following two paragraphs appear in all copies, 
-// modifications, and distributions.
-//
-// IN NO EVENT SHALL THE AUTHOR BE LIABLE TO ANY PARTY FOR DIRECT,
-// INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOST
-// PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS DOCUMENTATION,
-// EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// THE AUTHOR SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT
-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
-// PARTICULAR PURPOSE. THE SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF
-// ANY, PROVIDED HEREUNDER IS PROVIDED "AS IS". THE AUTHOR HAS NO OBLIGATION
-// TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
-//
-// V3.0		03/08/2004	-Initial Version for sqlite3
-//
-// V3.1		16/09/2004	-Implemented getXXXXField using sqlite3 functions
-//						-Added CppSQLiteDB3::tableExists()
-////////////////////////////////////////////////////////////////////////////////
+/*
+ * CppSQLite
+ * Developed by Rob Groves <rob.groves@btinternet.com>
+ * Maintained by NeoSmart Technologies <http://neosmart.net/>
+ * See LICENSE file for copyright and license info
+*/
+
 #ifndef _CppSQLite3_H_
 #define _CppSQLite3_H_
 
-// -------------------------------------------------------------
-// MDM The only change I've made to this code so far.
-// I could have added the path to the header to the VS environment
-// or to the project itself, but this small change means that 
-// sqlite integration into a VS project is easier.
-// #include "sqlite3.h"
-#include "..\SQLite\sqlite3.h"
-// -------------------------------------------------------------
-
+#include "sqlite3.h"
 #include <cstdio>
 #include <cstring>
 
@@ -47,7 +19,7 @@ class CppSQLite3Exception
 public:
 
     CppSQLite3Exception(const int nErrCode,
-                    char* szErrMess,
+                    const char* szErrMess,
                     bool bDeleteMsg=true);
 
     CppSQLite3Exception(const CppSQLite3Exception&  e);
@@ -126,7 +98,7 @@ public:
     CppSQLite3Query(const CppSQLite3Query& rQuery);
 
     CppSQLite3Query(sqlite3* pDB,
-				sqlite3_stmt* pVM,
+                sqlite3_stmt* pVM,
                 bool bEof,
                 bool bOwnVM=true);
 
@@ -147,6 +119,9 @@ public:
 
     int getIntField(int nField, int nNullValue=0);
     int getIntField(const char* szField, int nNullValue=0);
+    
+    long long getInt64Field(int nField, long long nNullValue=0);
+    long long getInt64Field(const char* szField, long long nNullValue=0);
 
     double getFloatField(int nField, double fNullValue=0.0);
     double getFloatField(const char* szField, double fNullValue=0.0);
@@ -170,7 +145,7 @@ private:
 
     void checkVM();
 
-	sqlite3* mpDB;
+    sqlite3* mpDB;
     sqlite3_stmt* mpVM;
     bool mbEof;
     int mnCols;
@@ -248,6 +223,7 @@ public:
 
     void bind(int nParam, const char* szValue);
     void bind(int nParam, const int nValue);
+    void bind(int nParam, const long long nValue);
     void bind(int nParam, const double dwValue);
     void bind(int nParam, const unsigned char* blobValue, int nLen);
     void bindNull(int nParam);
@@ -278,7 +254,7 @@ public:
 
     void close();
 
-	bool tableExists(const char* szTable);
+    bool tableExists(const char* szTable);
 
     int execDML(const char* szSQL);
 
