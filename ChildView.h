@@ -1,5 +1,4 @@
 #pragma once
-
 #define MAX_NODES 32768
 
 class myCEdit : public CEdit

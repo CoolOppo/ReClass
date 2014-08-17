@@ -1,6 +1,4 @@
-#ifndef SDK_H
-#define SDK_H
-
+#pragma once
 #include "ReClass.h"
 #if 0
 class ReclassSDK
@@ -162,4 +160,3 @@ void LoadPlugin( LPCSTR pszPath )
 	}
 }
 #endif
-#endif SDK_H

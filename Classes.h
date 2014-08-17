@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Debug.h"
-
 extern DWORD NodeCreateIndex;
 
 template <class T>

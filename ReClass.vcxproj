@@ -25,8 +25,8 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <UseOfMfc>Static</UseOfMfc>
-    <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -60,25 +60,27 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat>None</DebugInformationFormat>
       <MinimalRebuild />
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <BrowseInformation>true</BrowseInformation>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <Link>
-      <TargetMachine>MachineX86</TargetMachine>
-      <SubSystem>Windows</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <ForceFileOutput>Enabled</ForceFileOutput>
       <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ChildFrm.cpp" />
@@ -86,9 +88,6 @@
     <ClCompile Include="DialogClasses.cpp" />
     <ClCompile Include="DialogEdit.cpp" />
     <ClCompile Include="DialogTypes.cpp" />
-    <ClCompile Include="i_BeaEngine.cpp" />
-    <ClCompile Include="i_sqlite.c" />
-    <ClCompile Include="i_tinyxml.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="ReClass.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -116,11 +115,17 @@
     <None Include="Resources\ReClass.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="BeaEngine\Visual Studio\obj\Windows.msvc.release\beaengineSources\BeaEngine_s.vcxproj">
+      <Project>{5d4a6e60-1130-46ee-afa6-5394b430d0fc}</Project>
+    </ProjectReference>
     <ProjectReference Include="Scintilla\win32\SciLexer.vcxproj">
       <Project>{fbe04237-9c7b-4973-9c60-505975998b39}</Project>
     </ProjectReference>
     <ProjectReference Include="SQLite\SQLite.vcxproj">
       <Project>{a308a8f2-d876-4368-8a98-509f9a239662}</Project>
+    </ProjectReference>
+    <ProjectReference Include="tinyxml\tinyxml_lib.vcxproj">
+      <Project>{c406daec-0886-4771-8dea-9d7329b46cc1}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -5,7 +5,7 @@
 //#endif
 
 #define WIN32_LEAN_AND_MEAN
-#include <SDKDDKVer.h>
+#include "targetver.h"
 
 
 //#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      // some CString constructors will be explicit
@@ -41,9 +41,7 @@
 #include "tinyxml\tinyxml.h"
 
 #define BEA_ENGINE_STATIC
-#define BEA_USE_STDCALL
 #include "BeaEngine\include\beaengine\BeaEngine.h"
-#include "BeaEngine\beaengineSources\BeaEngine.c"
 //#pragma comment( lib, "../beaengine/Win32/Lib/BeaEngine.lib" )
 
 // Include Scintilla parser
@@ -265,4 +263,3 @@ extern DWORD NodeCreateIndex;
 __int64 StrToNum(const TCHAR *udata, int udatalen, int base);
 int SplitString(const CString& input, const CString& delimiter, CStringArray& results);
 DWORD_PTR ConvertStrToAddress(CString Address);
-

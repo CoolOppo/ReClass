@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "ReClass.h"
-
 #include "ChildFrm.h"
 
 #ifdef _DEBUG

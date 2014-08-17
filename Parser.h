@@ -1,6 +1,4 @@
-#ifndef PARSER_H
-#define PARSER_H
-
+#pragma once
 #include <iostream>
 #include <string>
 #include <regex>
@@ -105,7 +103,6 @@ void Parse( CString code )
 
 };
 
-#endif
 
 
 // http://stackoverflow.com/questions/241327/python-snippet-to-remove-c-and-c-comments
