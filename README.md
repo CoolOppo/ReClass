@@ -1,9 +1,10 @@
 ReClass
 =======
 
+**This is a guide on using ReClass that will temporarily serve as the README. [Download the latest release here!](https://github.com/CoolOppo/ReClass/releases/latest/)**
+
 [*Source*](http://www.unknowncheats.me/forum/general-programming-and-reversing/120805-reclass-usuage-reclass-and-its-content.html)
 
-**This is a guide on using ReClass that will temporarily serve as the README. [Download the latest release here!](https://github.com/CoolOppo/ReClass/releases/download/latest/ReClass.exe)**
 What Is ReClass?
 ----------------
 
