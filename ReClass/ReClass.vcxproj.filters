@@ -15,74 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ChildView.cpp">
+    <ClCompile Include="Source Files\ChildFrm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DialogClasses.cpp">
+    <ClCompile Include="Source Files\ChildView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DialogEdit.cpp">
+    <ClCompile Include="Source Files\DialogClasses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DialogTypes.cpp">
+    <ClCompile Include="Source Files\DialogEdit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainFrm.cpp">
+    <ClCompile Include="Source Files\DialogTypes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="Source Files\MainFrm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ReClass.cpp">
+    <ClCompile Include="Source Files\ReClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ChildFrm.cpp">
+    <ClCompile Include="Source Files\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ChildFrm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ChildView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DialogClasses.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DialogEdit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DialogTypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainFrm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ReClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ReClass.rc">
@@ -93,5 +49,192 @@
     <None Include="Resources\ReClass.rc2">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Resources\ribbon.mfcribbon-ms">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\output_wnd.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\output_wnd_hc.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\properties_wnd.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\properties_wnd_hc.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\general_class_VS.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\general_method_VS.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\open.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\closed.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\general_interface_VS.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\close.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\add.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\speles_random_ico.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\arrow_icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\pointer.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\array.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\custom.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\enum.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\float.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\left.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\right.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\matrix.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\signed.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\text.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\unsigned.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\vector.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\exchange.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\camera.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Toolbar256.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\filelarge.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\filesmall.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\writelarge.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\writesmall.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\buttons.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\properties.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\properties_hc.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\icon.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\toolbar1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\bmp00001.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\bmp00002.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\button.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\about.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\AddMark.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\icon1.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\ChildFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ChildView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Classes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DialogClasses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DialogEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\DialogTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MainFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ReClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SDK.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

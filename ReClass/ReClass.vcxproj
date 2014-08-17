@@ -42,7 +42,7 @@
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir);$(SolutionDir)Scintilla\include;$(SolutionDir)BeaEngine\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)Include;$(SolutionDir);$(SolutionDir)Scintilla\include;$(SolutionDir)BeaEngine\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -83,36 +83,21 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ChildFrm.cpp" />
-    <ClCompile Include="ChildView.cpp" />
-    <ClCompile Include="DialogClasses.cpp" />
-    <ClCompile Include="DialogEdit.cpp" />
-    <ClCompile Include="DialogTypes.cpp" />
-    <ClCompile Include="MainFrm.cpp" />
-    <ClCompile Include="ReClass.cpp" />
-    <ClCompile Include="stdafx.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ChildFrm.h" />
-    <ClInclude Include="ChildView.h" />
-    <ClInclude Include="Classes.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="DialogClasses.h" />
-    <ClInclude Include="DialogEdit.h" />
-    <ClInclude Include="DialogTypes.h" />
-    <ClInclude Include="MainFrm.h" />
-    <ClInclude Include="Parser.h" />
-    <ClInclude Include="ReClass.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="SDK.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <ClCompile Include="Source Files\ChildFrm.cpp" />
+    <ClCompile Include="Source Files\ChildView.cpp" />
+    <ClCompile Include="Source Files\DialogClasses.cpp" />
+    <ClCompile Include="Source Files\DialogEdit.cpp" />
+    <ClCompile Include="Source Files\DialogTypes.cpp" />
+    <ClCompile Include="Source Files\MainFrm.cpp" />
+    <ClCompile Include="Source Files\ReClass.cpp" />
+    <ClCompile Include="Source Files\stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ReClass.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ReClass.rc2" />
+    <None Include="Resources\ribbon.mfcribbon-ms" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BeaEngine\Visual Studio\obj\Windows.msvc.release\beaengineSources\BeaEngine_s.vcxproj">
@@ -127,6 +112,70 @@
     <ProjectReference Include="..\tinyxml\tinyxml_lib.vcxproj">
       <Project>{c406daec-0886-4771-8dea-9d7329b46cc1}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\about.bmp" />
+    <Image Include="Images\add.ico" />
+    <Image Include="Images\AddMark.png" />
+    <Image Include="Images\array.ico" />
+    <Image Include="Images\arrow_icon.ico" />
+    <Image Include="Images\button.bmp" />
+    <Image Include="Images\camera.ico" />
+    <Image Include="Images\close.ico" />
+    <Image Include="Images\closed.ico" />
+    <Image Include="Images\custom.ico" />
+    <Image Include="Images\enum.ico" />
+    <Image Include="Images\exchange.ico" />
+    <Image Include="Images\float.ico" />
+    <Image Include="Images\general_class_VS.ico" />
+    <Image Include="Images\general_interface_VS.ico" />
+    <Image Include="Images\general_method_VS.ico" />
+    <Image Include="Images\icon.bmp" />
+    <Image Include="Images\icon.ico" />
+    <Image Include="images\icon1.ico" />
+    <Image Include="Images\left.ico" />
+    <Image Include="Images\matrix.ico" />
+    <Image Include="Images\open.ico" />
+    <Image Include="Images\pointer.ico" />
+    <Image Include="Images\right.ico" />
+    <Image Include="Images\signed.ico" />
+    <Image Include="Images\speles_random_ico.ico" />
+    <Image Include="Images\text.ico" />
+    <Image Include="Images\unsigned.ico" />
+    <Image Include="Images\vector.ico" />
+    <Image Include="Resources\bmp00001.bmp" />
+    <Image Include="Resources\bmp00002.bmp" />
+    <Image Include="Resources\buttons.bmp" />
+    <Image Include="Resources\filelarge.bmp" />
+    <Image Include="Resources\filesmall.bmp" />
+    <Image Include="Resources\output_wnd.ico" />
+    <Image Include="Resources\output_wnd_hc.ico" />
+    <Image Include="Resources\properties.bmp" />
+    <Image Include="Resources\properties_hc.bmp" />
+    <Image Include="Resources\properties_wnd.ico" />
+    <Image Include="Resources\properties_wnd_hc.ico" />
+    <Image Include="Resources\Toolbar.bmp" />
+    <Image Include="Resources\toolbar1.bmp" />
+    <Image Include="Resources\Toolbar256.bmp" />
+    <Image Include="Resources\writelarge.bmp" />
+    <Image Include="Resources\writesmall.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\ChildFrm.h" />
+    <ClInclude Include="Include\ChildView.h" />
+    <ClInclude Include="Include\Classes.h" />
+    <ClInclude Include="Include\Debug.h" />
+    <ClInclude Include="Include\DialogClasses.h" />
+    <ClInclude Include="Include\DialogEdit.h" />
+    <ClInclude Include="Include\DialogTypes.h" />
+    <ClInclude Include="Include\MainFrm.h" />
+    <ClInclude Include="Include\Parser.h" />
+    <ClInclude Include="Include\ReClass.h" />
+    <ClInclude Include="Include\resource.h" />
+    <ClInclude Include="Include\SDK.h" />
+    <ClInclude Include="Include\stdafx.h" />
+    <ClInclude Include="Include\targetver.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
