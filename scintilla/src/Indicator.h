@@ -8,15 +8,26 @@
 #ifndef INDICATOR_H
 #define INDICATOR_H
 
+#ifdef SCI_NAMESPACE
+namespace Scintilla {
+#endif
+
 /**
  */
 class Indicator {
 public:
 	int style;
-	ColourPair fore;
-	Indicator() : style(INDIC_PLAIN), fore(ColourDesired(0,0,0)) {
+	bool under;
+	ColourDesired fore;
+	int fillAlpha;
+	int outlineAlpha;
+	Indicator() : style(INDIC_PLAIN), under(false), fore(ColourDesired(0,0,0)), fillAlpha(30), outlineAlpha(50) {
 	}
-	void Draw(Surface *surface, const PRectangle &rc, const PRectangle &rcLine);
+	void Draw(Surface *surface, const PRectangle &rc, const PRectangle &rcLine) const;
 };
+
+#ifdef SCI_NAMESPACE
+}
+#endif
 
 #endif

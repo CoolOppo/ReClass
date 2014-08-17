@@ -2,22 +2,15 @@
 /** @file Editor.h
  ** Defines the main editor class.
  **/
-// Copyright 1998-2003 by Neil Hodgson <neilh@scintilla.org>
+// Copyright 1998-2011 by Neil Hodgson <neilh@scintilla.org>
 // The License.txt file describes the conditions under which this software may be distributed.
 
 #ifndef EDITOR_H
 #define EDITOR_H
 
-/**
- */
-class Caret {
-public:
-	bool active;
-	bool on;
-	int period;
-
-	Caret();
-};
+#ifdef SCI_NAMESPACE
+namespace Scintilla {
+#endif
 
 /**
  */
@@ -42,197 +35,166 @@ public:
 };
 
 /**
+ * When platform has a way to generate an event before painting,
+ * accumulate needed styling range and other work items in 
+ * WorkNeeded to avoid unnecessary work inside paint handler
  */
-class LineLayout {
-private:
-	friend class LineLayoutCache;
-	int *lineStarts;
-	int lenLineStarts;
-	/// Drawing is only performed for @a maxLineLength characters on each line.
-	int lineNumber;
-	bool inCache;
+class WorkNeeded {
 public:
-	enum { wrapWidthInfinite = 0x7ffffff };
-	int maxLineLength;
-	int numCharsInLine;
-	enum validLevel { llInvalid, llCheckTextAndStyle, llPositions, llLines } validity;
-	int xHighlightGuide;
-	bool highlightColumn;
-	int selStart;
-	int selEnd;
-	bool containsCaret;
-	int edgeColumn;
-	char *chars;
-	unsigned char *styles;
-	int styleBitsSet;
-	char *indicators;
-	int *positions;
-	char bracePreviousStyles[2];
-
-	// Hotspot support
-	int hsStart;
-	int hsEnd;
-
-	// Wrapped line support
-	int widthLine;
-	int lines;
-
-	LineLayout(int maxLineLength_);
-	virtual ~LineLayout();
-	void Resize(int maxLineLength_);
-	void Free();
-	void Invalidate(validLevel validity_);
-	int LineStart(int line) {
-		if (line <= 0) {
-			return 0;
-		} else if ((line >= lines) || !lineStarts) {
-			return numCharsInLine;
-		} else {
-			return lineStarts[line];
-		}
-	}
-	void SetLineStart(int line, int start);
-	void SetBracesHighlight(Range rangeLine, Position braces[],
-		char bracesMatchStyle, int xHighlight);
-	void RestoreBracesHighlight(Range rangeLine, Position braces[]);
-};
-
-/**
- */
-class LineLayoutCache {
-	int level;
-	int length;
-	int size;
-	LineLayout **cache;
-	bool allInvalidated;
-	int styleClock;
-	int useCount;
-	void Allocate(int length_);
-	void AllocateForLevel(int linesOnScreen, int linesInDoc);
-public:
-	LineLayoutCache();
-	virtual ~LineLayoutCache();
-	void Deallocate();
-	enum {
-		llcNone=SC_CACHE_NONE,
-		llcCaret=SC_CACHE_CARET,
-		llcPage=SC_CACHE_PAGE,
-		llcDocument=SC_CACHE_DOCUMENT
+	enum workItems {
+		workNone=0,
+		workStyle=1,
+		workUpdateUI=2
 	};
-	void Invalidate(LineLayout::validLevel validity_);
-	void SetLevel(int level_);
-	int GetLevel() { return level; }
-	LineLayout *Retrieve(int lineNumber, int lineCaret, int maxChars, int styleClock_,
-		int linesOnScreen, int linesInDoc);
-	void Dispose(LineLayout *ll);
+	bool active;
+	enum workItems items;
+	Position upTo;
+
+	WorkNeeded() : active(false), items(workNone), upTo(0) {}
+	void Reset() {
+		active = false;
+		items = workNone;
+		upTo = 0;
+	}
+	void Need(workItems items_, Position pos) {
+		if ((items_ & workStyle) && (upTo < pos))
+			upTo = pos;
+		items = static_cast<workItems>(items | items_);
+	}
 };
 
 /**
- * Hold a piece of text selected for copying or dragging.
- * The text is expected to hold a terminating '\0' and this is counted in len.
+ * Hold a piece of text selected for copying or dragging, along with encoding and selection format information.
  */
 class SelectionText {
+	std::string s;
 public:
-	char *s;
-	int len;
 	bool rectangular;
+	bool lineCopy;
 	int codePage;
 	int characterSet;
-	SelectionText() : s(0), len(0), rectangular(false), codePage(0), characterSet(0) {}
+	SelectionText() : rectangular(false), lineCopy(false), codePage(0), characterSet(0) {}
 	~SelectionText() {
-		Free();
 	}
-	void Free() {
-		Set(0, 0, 0, 0, false);
+	void Clear() {
+		s.clear();
+		rectangular = false;
+		lineCopy = false;
+		codePage = 0;
+		characterSet = 0;
 	}
-	void Set(char *s_, int len_, int codePage_, int characterSet_, bool rectangular_) {
-		delete []s;
+	void Copy(const std::string &s_, int codePage_, int characterSet_, bool rectangular_, bool lineCopy_) {
 		s = s_;
-		if (s)
-			len = len_;
-		else
-			len = 0;
 		codePage = codePage_;
 		characterSet = characterSet_;
 		rectangular = rectangular_;
-	}
-	void Copy(const char *s_, int len_, int codePage_, int characterSet_, bool rectangular_) {
-		delete []s;
-		s = new char[len_];
-		if (s) {
-			len = len_;
-			for (int i = 0; i < len_; i++) {
-				s[i] = s_[i];
-			}
-		} else {
-			len = 0;
-		}
-		codePage = codePage_;
-		characterSet = characterSet_;
-		rectangular = rectangular_;
+		lineCopy = lineCopy_;
+		FixSelectionForClipboard();
 	}
 	void Copy(const SelectionText &other) {
-		Copy(other.s, other.len, other.codePage, other.characterSet, other.rectangular);
+		Copy(other.s, other.codePage, other.characterSet, other.rectangular, other.lineCopy);
+	}
+	const char *Data() const {
+		return s.c_str();
+	}
+	size_t Length() const {
+		return s.length();
+	}
+	size_t LengthWithTerminator() const {
+		return s.length() + 1;
+	}
+	bool Empty() const {
+		return s.empty();
+	}
+private:
+	void FixSelectionForClipboard() {
+		// To avoid truncating the contents of the clipboard when pasted where the
+		// clipboard contains NUL characters, replace NUL characters by spaces.
+		std::replace(s.begin(), s.end(), '\0', ' ');
+	}
+};
+
+struct WrapPending {
+	// The range of lines that need to be wrapped
+	enum { lineLarge = 0x7ffffff };
+	int start;	// When there are wraps pending, will be in document range
+	int end;	// May be lineLarge to indicate all of document after start
+	WrapPending() {
+		start = lineLarge;
+		end = lineLarge;
+	}
+	void Reset() {
+		start = lineLarge;
+		end = lineLarge;
+	}
+	void Wrapped(int line) {
+		if (start == line)
+			start++;
+	}
+	bool NeedsWrap() const {
+		return start < end;
+	}
+	bool AddRange(int lineStart, int lineEnd) {
+		const bool neededWrap = NeedsWrap();
+		bool changed = false;
+		if (start > lineStart) {
+			start = lineStart;
+			changed = true;
+		}
+		if ((end < lineEnd) || !neededWrap) {
+			end = lineEnd;
+			changed = true;
+		}
+		return changed;
 	}
 };
 
 /**
  */
-class Editor : public DocWatcher {
+class Editor : public EditModel, public DocWatcher {
 	// Private so Editor objects can not be copied
-	Editor(const Editor &) : DocWatcher() {}
-	Editor &operator=(const Editor &) { return *this; }
+	Editor(const Editor &);
+	Editor &operator=(const Editor &);
 
 protected:	// ScintillaBase subclass needs access to much of Editor
 
 	/** On GTK+, Scintilla is a container widget holding two scroll bars
 	 * whereas on Windows there is just one window with both scroll bars turned on. */
 	Window wMain;	///< The Scintilla parent window
+	Window wMargin;	///< May be separate when using a scroll view for wMain
 
 	/** Style resources may be expensive to allocate so are cached between uses.
 	 * When a style attribute is changed, this cache is flushed. */
 	bool stylesValid;
 	ViewStyle vs;
-	Palette palette;
+	int technology;
+	Point sizeRGBAImage;
+	float scaleRGBAImage;
 
-	int printMagnification;
-	int printColourMode;
-	int printWrapState;
+	MarginView marginView;
+	EditView view;
+
 	int cursorMode;
-	int controlCharSymbol;
 
 	bool hasFocus;
-	bool hideSelection;
-	bool inOverstrike;
-	int errorStatus;
 	bool mouseDownCaptures;
 
-	/** In bufferedDraw mode, graphics operations are drawn to a pixmap and then copied to
-	 * the screen. This avoids flashing but is about 30% slower. */
-	bool bufferedDraw;
-	/** In twoPhaseDraw mode, drawing is performed in two phases, first the background
-	* and then the foreground. This avoids chopping off characters that overlap the next run. */
-	bool twoPhaseDraw;
-
-	int xOffset;		///< Horizontal scrolled amount in pixels
 	int xCaretMargin;	///< Ensure this many pixels visible on both sides of caret
 	bool horizontalScrollBarVisible;
 	int scrollWidth;
 	bool verticalScrollBarVisible;
 	bool endAtLastLine;
-	bool caretSticky;
+	int caretSticky;
+	int marginOptions;
+	bool mouseSelectionRectangularSwitch;
+	bool multipleSelection;
+	bool additionalSelectionTyping;
+	int multiPasteMode;
 
-	Surface *pixmapLine;
-	Surface *pixmapSelMargin;
-	Surface *pixmapSelPattern;
-	Surface *pixmapIndentGuide;
-	Surface *pixmapIndentGuideHighlight;
-
-	LineLayoutCache llc;
+	int virtualSpaceOptions;
 
 	KeyMap kmap;
 
-	Caret caret;
 	Timer timer;
 	Timer autoScrollTimer;
 	enum { autoScrollDelay = 200 };
@@ -244,17 +206,18 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	int dwellDelay;
 	int ticksToDwell;
 	bool dwelling;
-	enum { selChar, selWord, selLine } selectionType;
+	enum { selChar, selWord, selSubLine, selWholeLine } selectionType;
 	Point ptMouseLast;
-	bool inDragDrop;
+	enum { ddNone, ddInitial, ddDragging } inDragDrop;
 	bool dropWentOutside;
-	int posDrag;
-	int posDrop;
+	SelectionPosition posDrop;
+	int hotSpotClickPos;
 	int lastXChosen;
-	int lineAnchor;
+	int lineAnchorPos;
 	int originalAnchorPos;
-	int currentPos;
-	int anchor;
+	int wordSelectAnchorStartPos;
+	int wordSelectAnchorEndPos;
+	int wordSelectInitialCaretPos;
 	int targetStart;
 	int targetEnd;
 	int searchFlags;
@@ -262,26 +225,18 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	int posTopLine;
 	int lengthForEncode;
 
-	bool needUpdateUI;
-	Position braces[2];
-	int bracesMatchStyle;
-	int highlightGuideColumn;
-
-	int theEdge;
+	int needUpdateUI;
 
 	enum { notPainting, painting, paintAbandoned } paintState;
+	bool paintAbandonedByStyling;
 	PRectangle rcPaint;
 	bool paintingAllText;
+	bool willRedrawAll;
+	WorkNeeded workNeeded;
 
 	int modEventMask;
 
 	SelectionText drag;
-	enum selTypes { noSel, selStream, selRectangle, selLines };
-	selTypes selType;
-	bool moveExtendsSelection;
-	int xStartSelect;	///< x position of start of rectangular selection
-	int xEndSelect;		///< x position of end of rectangular selection
-	bool primarySelection;
 
 	int caretXPolicy;
 	int caretXSlop;	///< Ensure this many pixels visible on both sides of caret
@@ -296,27 +251,12 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 
 	bool recordingMacro;
 
-	int foldFlags;
-	ContractionState cs;
-
-	// Hotspot support
-	int hsStart;
-	int hsEnd;
+	int foldAutomatic;
 
 	// Wrapping support
-	enum { eWrapNone, eWrapWord, eWrapChar } wrapState;
-	enum { wrapLineLarge = 0x7ffffff };
-	int wrapWidth;
-	int wrapStart;
-	int wrapEnd;
-	int wrapVisualFlags;
-	int wrapVisualFlagsLocation;
-	int wrapVisualStartIndent;
-	int actualWrapVisualStartIndent;
+	WrapPending wrapPending;
 
 	bool convertPastes;
-
-	Document *pdoc;
 
 	Editor();
 	virtual ~Editor();
@@ -325,81 +265,115 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 
 	void InvalidateStyleData();
 	void InvalidateStyleRedraw();
-	virtual void RefreshColourPalette(Palette &pal, bool want);
 	void RefreshStyleData();
-	void DropGraphics();
+	void SetRepresentations();
+	void DropGraphics(bool freeObjects);
+	void AllocateGraphics();
 
-	virtual PRectangle GetClientRectangle();
-	PRectangle GetTextRectangle();
+	// The top left visible point in main window coordinates. Will be 0,0 except for
+	// scroll views where it will be equivalent to the current scroll position.
+	virtual Point GetVisibleOriginInMain() const;
+	Point DocumentPointFromView(Point ptView) const;  // Convert a point from view space to document
+	int TopLineOfMain() const;   // Return the line at Main's y coordinate 0
+	virtual PRectangle GetClientRectangle() const;
+	virtual PRectangle GetClientDrawingRectangle();
+	PRectangle GetTextRectangle() const;
 
-	int LinesOnScreen();
-	int LinesToScroll();
-	int MaxScrollPos();
+	virtual int LinesOnScreen() const;
+	int LinesToScroll() const;
+	int MaxScrollPos() const;
+	SelectionPosition ClampPositionIntoDocument(SelectionPosition sp) const;
+	Point LocationFromPosition(SelectionPosition pos);
 	Point LocationFromPosition(int pos);
 	int XFromPosition(int pos);
-	int PositionFromLocation(Point pt);
-	int PositionFromLocationClose(Point pt);
+	int XFromPosition(SelectionPosition sp);
+	SelectionPosition SPositionFromLocation(Point pt, bool canReturnInvalid=false, bool charPosition=false, bool virtualSpace=true);
+	int PositionFromLocation(Point pt, bool canReturnInvalid = false, bool charPosition = false);
+	SelectionPosition SPositionFromLineX(int lineDoc, int x);
 	int PositionFromLineX(int line, int x);
-	int LineFromLocation(Point pt);
+	int LineFromLocation(Point pt) const;
 	void SetTopLine(int topLineNew);
 
-	bool AbandonPaint();
-	void RedrawRect(PRectangle rc);
-	void Redraw();
-	void RedrawSelMargin(int line=-1);
-	PRectangle RectangleFromRange(int start, int end);
+	virtual bool AbandonPaint();
+	virtual void RedrawRect(PRectangle rc);
+	virtual void DiscardOverdraw();
+	virtual void Redraw();
+	void RedrawSelMargin(int line=-1, bool allAfter=false);
+	PRectangle RectangleFromRange(Range r, int overlap);
 	void InvalidateRange(int start, int end);
 
-	int CurrentPosition();
-	bool SelectionEmpty();
-	int SelectionStart();
-	int SelectionEnd();
+	bool UserVirtualSpace() const {
+		return ((virtualSpaceOptions & SCVS_USERACCESSIBLE) != 0);
+	}
+	int CurrentPosition() const;
+	bool SelectionEmpty() const;
+	SelectionPosition SelectionStart();
+	SelectionPosition SelectionEnd();
 	void SetRectangularRange();
-	void InvalidateSelection(int currentPos_, int anchor_);
+	void ThinRectangularRange();
+	void InvalidateSelection(SelectionRange newMain, bool invalidateWholeSelection=false);
+	void SetSelection(SelectionPosition currentPos_, SelectionPosition anchor_);
 	void SetSelection(int currentPos_, int anchor_);
+	void SetSelection(SelectionPosition currentPos_);
 	void SetSelection(int currentPos_);
+	void SetEmptySelection(SelectionPosition currentPos_);
 	void SetEmptySelection(int currentPos_);
 	bool RangeContainsProtected(int start, int end) const;
 	bool SelectionContainsProtected();
-	int MovePositionOutsideChar(int pos, int moveDir, bool checkLineEnd=true);
-	int MovePositionTo(int newPos, selTypes sel=noSel, bool ensureVisible=true);
-	int MovePositionSoVisible(int pos, int moveDir);
+	int MovePositionOutsideChar(int pos, int moveDir, bool checkLineEnd=true) const;
+	SelectionPosition MovePositionOutsideChar(SelectionPosition pos, int moveDir, bool checkLineEnd=true) const;
+	int MovePositionTo(SelectionPosition newPos, Selection::selTypes selt=Selection::noSel, bool ensureVisible=true);
+	int MovePositionTo(int newPos, Selection::selTypes selt=Selection::noSel, bool ensureVisible=true);
+	SelectionPosition MovePositionSoVisible(SelectionPosition pos, int moveDir);
+	SelectionPosition MovePositionSoVisible(int pos, int moveDir);
+	Point PointMainCaret();
 	void SetLastXChosen();
 
 	void ScrollTo(int line, bool moveThumb=true);
 	virtual void ScrollText(int linesToMove);
 	void HorizontalScrollTo(int xPos);
+	void VerticalCentreCaret();
+	void MoveSelectedLines(int lineDelta);
+	void MoveSelectedLinesUp();
+	void MoveSelectedLinesDown();
 	void MoveCaretInsideView(bool ensureVisible=true);
 	int DisplayFromPosition(int pos);
+
+	struct XYScrollPosition {
+		int xOffset;
+		int topLine;
+		XYScrollPosition(int xOffset_, int topLine_) : xOffset(xOffset_), topLine(topLine_) {}
+		bool operator==(const XYScrollPosition &other) const {
+			return (xOffset == other.xOffset) && (topLine == other.topLine);
+		}
+	};
+	enum XYScrollOptions {
+		xysUseMargin=0x1,
+		xysVertical=0x2,
+		xysHorizontal=0x4,
+		xysDefault=xysUseMargin|xysVertical|xysHorizontal};
+	XYScrollPosition XYScrollToMakeVisible(const SelectionRange &range, const XYScrollOptions options);
+	void SetXYScroll(XYScrollPosition newXY);
 	void EnsureCaretVisible(bool useMargin=true, bool vert=true, bool horiz=true);
+	void ScrollRange(SelectionRange range);
 	void ShowCaretAtCurrentPosition();
 	void DropCaret();
+	void CaretSetPeriod(int period);
 	void InvalidateCaret();
 	virtual void UpdateSystemCaret();
 
-	void NeedWrapping(int docLineStart = 0, int docLineEnd = wrapLineLarge);
-	bool WrapLines(bool fullWrap, int priorityWrapLineStart);
+	bool Wrapping() const;
+	void NeedWrapping(int docLineStart=0, int docLineEnd=WrapPending::lineLarge);
+	bool WrapOneLine(Surface *surface, int lineToWrap);
+	enum wrapScope {wsAll, wsVisible, wsIdle};
+	bool WrapLines(enum wrapScope ws);
 	void LinesJoin();
 	void LinesSplit(int pixelWidth);
 
-	int SubstituteMarkerIfEmpty(int markerCheck, int markerDefault);
 	void PaintSelMargin(Surface *surface, PRectangle &rc);
-	LineLayout *RetrieveLineLayout(int lineNumber);
-	void LayoutLine(int line, Surface *surface, ViewStyle &vstyle, LineLayout *ll,
-		int width=LineLayout::wrapWidthInfinite);
-	ColourAllocated SelectionBackground(ViewStyle &vsDraw);
-	ColourAllocated TextBackground(ViewStyle &vsDraw, bool overrideBackground, ColourAllocated background, bool inSelection, bool inHotspot, int styleMain, int i, LineLayout *ll);
-	void DrawIndentGuide(Surface *surface, int lineVisible, int lineHeight, int start, PRectangle rcSegment, bool highlight);
-	void DrawWrapMarker(Surface *surface, PRectangle rcPlace, bool isEndMarker, ColourAllocated wrapColour);
-	void DrawEOL(Surface *surface, ViewStyle &vsDraw, PRectangle rcLine, LineLayout *ll,
-		int line, int lineEnd, int xStart, int subLine, int subLineStart,
-		bool overrideBackground, ColourAllocated background,
-		bool drawWrapMark, ColourAllocated wrapColour);
-	void DrawLine(Surface *surface, ViewStyle &vsDraw, int line, int lineVisible, int xStart,
-		PRectangle rcLine, LineLayout *ll, int subLine=0);
 	void RefreshPixMaps(Surface *surfaceWindow);
 	void Paint(Surface *surfaceWindow, PRectangle rcArea);
-	long FormatRange(bool draw, RangeToFormat *pfr);
+	long FormatRange(bool draw, Sci_RangeToFormat *pfr);
 	int TextWidth(int style, const char *text);
 
 	virtual void SetVerticalScrollPos() = 0;
@@ -409,14 +383,20 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	void SetScrollBars();
 	void ChangeSize();
 
+	void FilterSelections();
+	int InsertSpace(int position, unsigned int spaces);
 	void AddChar(char ch);
-	virtual void AddCharUTF(char *s, unsigned int len, bool treatAsDBCS=false);
-	void ClearSelection();
+	virtual void AddCharUTF(const char *s, unsigned int len, bool treatAsDBCS=false);
+	void InsertPaste(const char *text, int len);
+	enum PasteShape { pasteStream=0, pasteRectangular = 1, pasteLine = 2 };
+	void InsertPasteShape(const char *text, int len, PasteShape shape);
+	void ClearSelection(bool retainMultipleSelections = false);
 	void ClearAll();
-    	void ClearDocumentStyle();
+	void ClearDocumentStyle();
 	void Cut();
-	void PasteRectangular(int pos, const char *ptr, int len);
+	void PasteRectangular(SelectionPosition pos, const char *ptr, int len);
 	virtual void Copy() = 0;
+	virtual void CopyAllowLine();
 	virtual bool CanPaste();
 	virtual void Paste() = 0;
 	void Clear();
@@ -427,20 +407,29 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	void DelCharBack(bool allowLineStartDeletion);
 	virtual void ClaimSelection() = 0;
 
+	static int ModifierFlags(bool shift, bool ctrl, bool alt, bool meta=false);
 	virtual void NotifyChange() = 0;
 	virtual void NotifyFocus(bool focus);
+	virtual void SetCtrlID(int identifier);
 	virtual int GetCtrlID() { return ctrlID; }
 	virtual void NotifyParent(SCNotification scn) = 0;
 	virtual void NotifyStyleToNeeded(int endStyleNeeded);
 	void NotifyChar(int ch);
-	void NotifyMove(int position);
 	void NotifySavePoint(bool isSavePoint);
 	void NotifyModifyAttempt();
-	virtual void NotifyDoubleClick(Point pt, bool shift);
+	virtual void NotifyDoubleClick(Point pt, int modifiers);
+	virtual void NotifyDoubleClick(Point pt, bool shift, bool ctrl, bool alt);
+	void NotifyHotSpotClicked(int position, int modifiers);
 	void NotifyHotSpotClicked(int position, bool shift, bool ctrl, bool alt);
+	void NotifyHotSpotDoubleClicked(int position, int modifiers);
 	void NotifyHotSpotDoubleClicked(int position, bool shift, bool ctrl, bool alt);
-	void NotifyUpdateUI();
+	void NotifyHotSpotReleaseClick(int position, int modifiers);
+	void NotifyHotSpotReleaseClick(int position, bool shift, bool ctrl, bool alt);
+	bool NotifyUpdateUI();
 	void NotifyPainted();
+	void NotifyIndicatorClick(bool click, int position, int modifiers);
+	void NotifyIndicatorClick(bool click, int position, bool shift, bool ctrl, bool alt);
+	bool NotifyMarginClick(Point pt, int modifiers);
 	bool NotifyMarginClick(Point pt, bool shift, bool ctrl, bool alt);
 	void NotifyNeedShown(int pos, int len);
 	void NotifyDwelling(Point pt, bool state);
@@ -452,26 +441,30 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	void NotifyModified(Document *document, DocModification mh, void *userData);
 	void NotifyDeleted(Document *document, void *userData);
 	void NotifyStyleNeeded(Document *doc, void *userData, int endPos);
+	void NotifyLexerChanged(Document *doc, void *userData);
+	void NotifyErrorOccurred(Document *doc, void *userData, int status);
 	void NotifyMacroRecord(unsigned int iMessage, uptr_t wParam, sptr_t lParam);
 
-	void PageMove(int direction, selTypes sel=noSel, bool stuttered = false);
-	void ChangeCaseOfSelection(bool makeUpperCase);
+	void ContainerNeedsUpdate(int flags);
+	void PageMove(int direction, Selection::selTypes selt=Selection::noSel, bool stuttered = false);
+	enum { cmSame, cmUpper, cmLower };
+	virtual std::string CaseMapString(const std::string &s, int caseMapping);
+	void ChangeCaseOfSelection(int caseMapping);
 	void LineTranspose();
 	void Duplicate(bool forLine);
 	virtual void CancelModes();
 	void NewLine();
-	void CursorUpOrDown(int direction, selTypes sel=noSel);
-	void ParaUpOrDown(int direction, selTypes sel=noSel);
+	void CursorUpOrDown(int direction, Selection::selTypes selt=Selection::noSel);
+	void ParaUpOrDown(int direction, Selection::selTypes selt=Selection::noSel);
 	int StartEndDisplayLine(int pos, bool start);
 	virtual int KeyCommand(unsigned int iMessage);
 	virtual int KeyDefault(int /* key */, int /*modifiers*/);
+	int KeyDownWithModifiers(int key, int modifiers, bool *consumed);
 	int KeyDown(int key, bool shift, bool ctrl, bool alt, bool *consumed=0);
-
-	int GetWhitespaceVisible();
-	void SetWhitespaceVisible(int view);
 
 	void Indent(bool forwards);
 
+	virtual CaseFolder *CaseFolderForEncoding();
 	long FindText(uptr_t wParam, sptr_t lParam);
 	void SearchAnchor();
 	long SearchText(unsigned int iMessage, uptr_t wParam, sptr_t lParam);
@@ -479,56 +472,92 @@ protected:	// ScintillaBase subclass needs access to much of Editor
 	void GoToLine(int lineNo);
 
 	virtual void CopyToClipboard(const SelectionText &selectedText) = 0;
-	char *CopyRange(int start, int end);
-	void CopySelectionFromRange(SelectionText *ss, int start, int end);
-	void CopySelectionRange(SelectionText *ss);
+	std::string RangeText(int start, int end) const;
+	void CopySelectionRange(SelectionText *ss, bool allowLineCopy=false);
 	void CopyRangeToClipboard(int start, int end);
 	void CopyText(int length, const char *text);
-	void SetDragPosition(int newPos);
+	void SetDragPosition(SelectionPosition newPos);
 	virtual void DisplayCursor(Window::Cursor c);
+	virtual bool DragThreshold(Point ptStart, Point ptNow);
 	virtual void StartDrag();
-	void DropAt(int position, const char *value, bool moving, bool rectangular);
-	/** PositionInSelection returns 0 if position in selection, -1 if position before selection, and 1 if after.
-	 * Before means either before any line of selection or before selection on its line, with a similar meaning to after. */
-	int PositionInSelection(int pos);
+	void DropAt(SelectionPosition position, const char *value, size_t lengthValue, bool moving, bool rectangular);
+	void DropAt(SelectionPosition position, const char *value, bool moving, bool rectangular);
+	/** PositionInSelection returns true if position in selection. */
+	bool PositionInSelection(int pos);
 	bool PointInSelection(Point pt);
-	bool PointInSelMargin(Point pt);
-	void LineSelection(int lineCurrent_, int lineAnchor_);
+	bool PointInSelMargin(Point pt) const;
+	Window::Cursor GetMarginCursor(Point pt) const;
+	void TrimAndSetSelection(int currentPos_, int anchor_);
+	void LineSelection(int lineCurrentPos_, int lineAnchorPos_, bool wholeLine);
+	void WordSelection(int pos);
 	void DwellEnd(bool mouseMoved);
+	void MouseLeave();
+	virtual void ButtonDownWithModifiers(Point pt, unsigned int curTime, int modifiers);
 	virtual void ButtonDown(Point pt, unsigned int curTime, bool shift, bool ctrl, bool alt);
+	void ButtonMoveWithModifiers(Point pt, int modifiers);
 	void ButtonMove(Point pt);
 	void ButtonUp(Point pt, unsigned int curTime, bool ctrl);
 
 	void Tick();
 	bool Idle();
-	virtual void SetTicking(bool on) = 0;
+	virtual void SetTicking(bool on);
+	enum TickReason { tickCaret, tickScroll, tickWiden, tickDwell, tickPlatform };
+	virtual void TickFor(TickReason reason);
+	virtual bool FineTickerAvailable();
+	virtual bool FineTickerRunning(TickReason reason);
+	virtual void FineTickerStart(TickReason reason, int millis, int tolerance);
+	virtual void FineTickerCancel(TickReason reason);
 	virtual bool SetIdle(bool) { return false; }
 	virtual void SetMouseCapture(bool on) = 0;
 	virtual bool HaveMouseCapture() = 0;
 	void SetFocusState(bool focusState);
+
+	int PositionAfterArea(PRectangle rcArea) const;
+	void StyleToPositionInView(Position pos);
+	virtual void IdleWork();
+	virtual void QueueIdleWork(WorkNeeded::workItems items, int upTo=0);
 
 	virtual bool PaintContains(PRectangle rc);
 	bool PaintContainsMargin();
 	void CheckForChangeOutsidePaint(Range r);
 	void SetBraceHighlight(Position pos0, Position pos1, int matchStyle);
 
-	void SetDocPointer(Document *document);
+	void SetAnnotationHeights(int start, int end);
+	virtual void SetDocPointer(Document *document);
 
-	void Expand(int &line, bool doExpand);
-	void ToggleContraction(int line);
+	void SetAnnotationVisible(int visible);
+
+	int ExpandLine(int line);
+	void SetFoldExpanded(int lineDoc, bool expanded);
+	void FoldLine(int line, int action);
+	void FoldExpand(int line, int action, int level);
+	int ContractedFoldNext(int lineStart) const;
 	void EnsureLineVisible(int lineDoc, bool enforcePolicy);
+	void FoldChanged(int line, int levelNow, int levelPrev);
+	void NeedShown(int pos, int len);
+	void FoldAll(int action);
+
+	int GetTag(char *tagValue, int tagNumber);
 	int ReplaceTarget(bool replacePatterns, const char *text, int length=-1);
 
-	bool PositionIsHotspot(int position);
+	bool PositionIsHotspot(int position) const;
 	bool PointIsHotspot(Point pt);
 	void SetHotSpotRange(Point *pt);
-	void GetHotSpotRange(int& hsStart, int& hsEnd);
+	Range GetHotSpotRange() const;
 
 	int CodePage() const;
 	virtual bool ValidCodePage(int /* codePage */) const { return true; }
 	int WrapCount(int line);
+	void AddStyledText(char *buffer, int appendLength);
 
 	virtual sptr_t DefWndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam) = 0;
+	void StyleSetMessage(unsigned int iMessage, uptr_t wParam, sptr_t lParam);
+	sptr_t StyleGetMessage(unsigned int iMessage, uptr_t wParam, sptr_t lParam);
+
+	static const char *StringFromEOLMode(int eolMode);
+
+	static sptr_t StringResult(sptr_t lParam, const char *val);
+	static sptr_t BytesResult(sptr_t lParam, const unsigned char *val, size_t len);
 
 public:
 	// Public so the COM thunks can access it.
@@ -537,6 +566,8 @@ public:
 	virtual sptr_t WndProc(unsigned int iMessage, uptr_t wParam, sptr_t lParam);
 	// Public so scintilla_set_id can use it.
 	int ctrlID;
+	// Public so COM methods for drag and drop can set it.
+	int errorStatus;
 	friend class AutoSurface;
 	friend class SelectionLineIterator;
 };
@@ -548,9 +579,9 @@ class AutoSurface {
 private:
 	Surface *surf;
 public:
-	AutoSurface(Editor *ed) : surf(0) {
+	AutoSurface(Editor *ed, int technology = -1) : surf(0) {
 		if (ed->wMain.GetID()) {
-			surf = Surface::Allocate();
+			surf = Surface::Allocate(technology != -1 ? technology : ed->technology);
 			if (surf) {
 				surf->Init(ed->wMain.GetID());
 				surf->SetUnicodeMode(SC_CP_UTF8 == ed->CodePage());
@@ -558,9 +589,9 @@ public:
 			}
 		}
 	}
-	AutoSurface(SurfaceID sid, Editor *ed) : surf(0) {
+	AutoSurface(SurfaceID sid, Editor *ed, int technology = -1) : surf(0) {
 		if (ed->wMain.GetID()) {
-			surf = Surface::Allocate();
+			surf = Surface::Allocate(technology != -1 ? technology : ed->technology);
 			if (surf) {
 				surf->Init(sid, ed->wMain.GetID());
 				surf->SetUnicodeMode(SC_CP_UTF8 == ed->CodePage());
@@ -578,5 +609,9 @@ public:
 		return surf;
 	}
 };
+
+#ifdef SCI_NAMESPACE
+}
+#endif
 
 #endif

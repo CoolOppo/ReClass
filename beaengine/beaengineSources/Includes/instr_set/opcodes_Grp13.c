@@ -34,7 +34,7 @@ void __bea_callspec__ G13_(PDISASM pMyDisasm)
             GV.SSE_ = 0;
             if (GV.MOD_== 0x3) {
                 #ifndef BEA_LIGHT_DISASSEMBLY
-                   (void) strcpy_r((*pMyDisasm).Instruction.Mnemonic, "psrld ");
+                   (void) strcpy ((*pMyDisasm).Instruction.Mnemonic, "psrld ");
                 #endif
             }
             else {
@@ -60,7 +60,7 @@ void __bea_callspec__ G13_(PDISASM pMyDisasm)
             GV.MMX_ = 0;
             if (GV.MOD_== 0x3) {
                 #ifndef BEA_LIGHT_DISASSEMBLY
-                   (void) strcpy_r((*pMyDisasm).Instruction.Mnemonic, "psrld ");
+                   (void) strcpy ((*pMyDisasm).Instruction.Mnemonic, "psrld ");
                 #endif
             }
             else {
@@ -88,7 +88,7 @@ void __bea_callspec__ G13_(PDISASM pMyDisasm)
             GV.SSE_ = 0;
             if (GV.MOD_== 0x3) {
                 #ifndef BEA_LIGHT_DISASSEMBLY
-                   (void) strcpy_r((*pMyDisasm).Instruction.Mnemonic, "psrad ");
+                   (void) strcpy ((*pMyDisasm).Instruction.Mnemonic, "psrad ");
                 #endif
             }
             else {
@@ -113,7 +113,7 @@ void __bea_callspec__ G13_(PDISASM pMyDisasm)
             GV.MMX_ = 0;
             if (GV.MOD_== 0x3) {
                 #ifndef BEA_LIGHT_DISASSEMBLY
-                   (void) strcpy_r((*pMyDisasm).Instruction.Mnemonic, "psrad ");
+                   (void) strcpy ((*pMyDisasm).Instruction.Mnemonic, "psrad ");
                 #endif
             }
             else {
@@ -142,7 +142,7 @@ void __bea_callspec__ G13_(PDISASM pMyDisasm)
             GV.SSE_ = 0;
             if (GV.MOD_== 0x3) {
                 #ifndef BEA_LIGHT_DISASSEMBLY
-                   (void) strcpy_r((*pMyDisasm).Instruction.Mnemonic, "pslld ");
+                   (void) strcpy ((*pMyDisasm).Instruction.Mnemonic, "pslld ");
                 #endif
             }
             else {
@@ -168,7 +168,7 @@ void __bea_callspec__ G13_(PDISASM pMyDisasm)
             GV.MMX_ = 0;
             if (GV.MOD_== 0x3) {
                 #ifndef BEA_LIGHT_DISASSEMBLY
-                   (void) strcpy_r((*pMyDisasm).Instruction.Mnemonic, "pslld ");
+                   (void) strcpy ((*pMyDisasm).Instruction.Mnemonic, "pslld ");
                 #endif
             }
             else {
