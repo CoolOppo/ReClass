@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGUID>{D9555FF7-1353-4D72-AAD1-27D581CEA1D4}</ProjectGUID>
+    <ProjectGUID>{97A8720D-550F-4D70-B30C-5E55441E3B22}</ProjectGUID>
     <Keyword>Win32Proj</Keyword>
     <Platform>Win32</Platform>
     <ProjectName>ALL_BUILD</ProjectName>
@@ -64,7 +64,7 @@
     </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\beaengineSources;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\include;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\unittest\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\beaengineSources;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\include;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\unittest\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -74,7 +74,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\beaengineSources;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\include;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\unittest\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\beaengineSources;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\include;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\unittest\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -84,7 +84,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\beaengineSources;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\include;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\unittest\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\beaengineSources;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\include;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\unittest\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -94,7 +94,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\beaengineSources;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\include;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\unittest\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\beaengineSources;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\include;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\unittest\thirdparty\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -104,9 +104,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <CustomBuild Include="..\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine "-BC:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio" --check-stamp-file "C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\generate.stamp"
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine "-BC:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio" --check-stamp-file "C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -114,12 +114,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeSystem.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCCompiler.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindZLIB.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeParseArguments.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeSystem.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCCompiler.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindZLIB.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeParseArguments.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine "-BC:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio" --check-stamp-file "C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\generate.stamp"
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine "-BC:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio" --check-stamp-file "C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -127,12 +127,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeSystem.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCCompiler.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindZLIB.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeParseArguments.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeSystem.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCCompiler.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindZLIB.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeParseArguments.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine "-BC:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio" --check-stamp-file "C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\generate.stamp"
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine "-BC:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio" --check-stamp-file "C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -140,12 +140,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeSystem.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCCompiler.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindZLIB.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeParseArguments.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeSystem.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCCompiler.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindZLIB.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeParseArguments.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine "-BC:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio" --check-stamp-file "C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\generate.stamp"
+"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine "-BC:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio" --check-stamp-file "C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -153,13 +153,13 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeSystem.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCCompiler.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindZLIB.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeParseArguments.cmake;C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\CMakeLists.txt;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeSystem.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCCompiler.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\3.0.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindZLIB.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\FindPackageMessage.cmake;C:\Program Files (x86)\CMake\share\cmake-3.0\Modules\CMakeParseArguments.cmake;C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="CMakeFiles\fbe427ff2deae5f2ecc009fa77198e0a\ALL_BUILD.rule">
+    <CustomBuild Include="CMakeFiles\afee45a24d4eb2c4da80d15019fc8b94\ALL_BUILD.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Build all projects</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
 :cmEnd
@@ -168,8 +168,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio/CMakeFiles/fbe427ff2deae5f2ecc009fa77198e0a/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\ALL_BUILD</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio/CMakeFiles/afee45a24d4eb2c4da80d15019fc8b94/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\ALL_BUILD</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Build all projects</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
@@ -179,8 +179,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio/CMakeFiles/fbe427ff2deae5f2ecc009fa77198e0a/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\ALL_BUILD</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio/CMakeFiles/afee45a24d4eb2c4da80d15019fc8b94/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\ALL_BUILD</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Build all projects</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
@@ -190,8 +190,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio/CMakeFiles/fbe427ff2deae5f2ecc009fa77198e0a/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\ALL_BUILD</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio/CMakeFiles/afee45a24d4eb2c4da80d15019fc8b94/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\ALL_BUILD</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Build all projects</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
@@ -201,8 +201,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio/CMakeFiles/fbe427ff2deae5f2ecc009fa77198e0a/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Maxwell\Documents\GitHub\Reclass64\BeaEngine\Visual Studio\CMakeFiles\ALL_BUILD</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio/CMakeFiles/afee45a24d4eb2c4da80d15019fc8b94/ALL_BUILD.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Maxwell\Documents\GitHub\ReClass\BeaEngine\Visual Studio\CMakeFiles\ALL_BUILD</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
@@ -210,11 +210,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <None Include="CMakeFiles\ALL_BUILD" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio/obj/Windows.msvc.release/beaengineSources/BeaEngine_s.vcxproj">
-      <Project>22D31B72-3DB9-429C-AC64-8778967994C7</Project>
+    <ProjectReference Include="C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio/obj/Windows.msvc.release/beaengineSources/BeaEngine_s.vcxproj">
+      <Project>DDB9B8BB-5192-4212-BA01-D15850BB010E</Project>
     </ProjectReference>
-    <ProjectReference Include="C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio/ZERO_CHECK.vcxproj">
-      <Project>C759D8FE-9004-4A88-ABB5-5E887EA645F7</Project>
+    <ProjectReference Include="C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio/ZERO_CHECK.vcxproj">
+      <Project>A2E5CDCC-8263-4E05-8749-B3A645196225</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

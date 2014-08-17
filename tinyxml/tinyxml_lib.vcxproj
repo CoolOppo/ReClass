@@ -66,6 +66,12 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
+    <Lib>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Lib>
+    <Lib>
+      <SubSystem>Windows</SubSystem>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

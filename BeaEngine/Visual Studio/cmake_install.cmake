@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine
+# Install script for directory: C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -29,7 +29,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio/obj/Windows.msvc.release/beaengineSources/cmake_install.cmake")
+  include("C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio/obj/Windows.msvc.release/beaengineSources/cmake_install.cmake")
 
 endif()
 
@@ -39,7 +39,7 @@ else()
   set(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 endif()
 
-file(WRITE "C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio/${CMAKE_INSTALL_MANIFEST}" "")
+file(WRITE "C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio/${CMAKE_INSTALL_MANIFEST}" "")
 foreach(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  file(APPEND "C:/Users/Maxwell/Documents/GitHub/Reclass64/BeaEngine/Visual Studio/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  file(APPEND "C:/Users/Maxwell/Documents/GitHub/ReClass/BeaEngine/Visual Studio/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 endforeach()

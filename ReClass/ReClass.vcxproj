@@ -42,7 +42,7 @@
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Scintilla\include;$(SolutionDir)BeaEngine\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir);$(SolutionDir)Scintilla\include;$(SolutionDir)BeaEngine\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,16 +115,16 @@
     <None Include="Resources\ReClass.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="BeaEngine\Visual Studio\obj\Windows.msvc.release\beaengineSources\BeaEngine_s.vcxproj">
+    <ProjectReference Include="..\BeaEngine\Visual Studio\obj\Windows.msvc.release\beaengineSources\BeaEngine_s.vcxproj">
       <Project>{5d4a6e60-1130-46ee-afa6-5394b430d0fc}</Project>
     </ProjectReference>
-    <ProjectReference Include="Scintilla\win32\SciLexer.vcxproj">
+    <ProjectReference Include="..\Scintilla\win32\SciLexer.vcxproj">
       <Project>{fbe04237-9c7b-4973-9c60-505975998b39}</Project>
     </ProjectReference>
-    <ProjectReference Include="SQLite\SQLite.vcxproj">
+    <ProjectReference Include="..\SQLite\SQLite.vcxproj">
       <Project>{a308a8f2-d876-4368-8a98-509f9a239662}</Project>
     </ProjectReference>
-    <ProjectReference Include="tinyxml\tinyxml_lib.vcxproj">
+    <ProjectReference Include="..\tinyxml\tinyxml_lib.vcxproj">
       <Project>{c406daec-0886-4771-8dea-9d7329b46cc1}</Project>
     </ProjectReference>
   </ItemGroup>
