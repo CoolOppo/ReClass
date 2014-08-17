@@ -48,13 +48,14 @@
 #include "Scintilla\include\SciLexer.h"
 
 
-#if _WIN64
-#define RECLASS_ARCH_STR	"x64"
-#else
-#define RECLASS_ARCH_STR	"x86"
-#endif
-
-#define RECLASS_FULLNAME	"ReClass 2014 " RECLASS_ARCH_STR
+//#if _WIN64
+//#define RECLASS_ARCH_STR	"x64"
+//#else
+//#define RECLASS_ARCH_STR	"x86"
+//#endif
+//
+//#define RECLASS_FULLNAME	"ReClass 2014 " RECLASS_ARCH_STR
+#define RECLASS_FULLNAME "ReClass"
 
 //lm: this gotta move:
 
