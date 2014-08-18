@@ -180,4 +180,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="ReClass.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
